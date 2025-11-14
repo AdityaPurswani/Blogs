@@ -9,7 +9,9 @@ interface BlogCardProps {
     slug: string
     createdAt: string
     author: {
+      id: string
       name: string | null
+      image: string | null
     }
     _count: {
       likes: number
