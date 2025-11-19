@@ -25,13 +25,17 @@ export default function SignIn() {
       })
 
       if (result?.error) {
-        toast.error('Invalid credentials')
-      } else {
+        console.error('Sign in error:', result.error)
+        toast.error(result.error === 'CredentialsSignin' ? 'Invalid email or password' : `Error: ${result.error}`)
+      } else if (result?.ok) {
         toast.success('Signed in successfully!')
         router.push('/')
+      } else {
+        toast.error('Failed to sign in. Please try again.')
       }
-    } catch (error) {
-      toast.error('Failed to sign in')
+    } catch (error: any) {
+      console.error('Sign in exception:', error)
+      toast.error(`Failed to sign in: ${error.message || 'Unknown error'}`)
     } finally {
       setLoading(false)
     }
